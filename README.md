@@ -78,7 +78,7 @@ data-warehouse-pipeline-sql/
 ## BI Analytic & Reporting & (Data Analysis)
 
 ## License
-This project is [license under]:(MIT License) you are free to use, modify, and share project with proper attribution
+This project is [license under]:(https://opensource.org/license/mit) you are free to use, modify, and share project with proper attribution
 
 ### About me
 
