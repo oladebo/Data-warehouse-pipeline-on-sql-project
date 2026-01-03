@@ -1,12 +1,12 @@
 # Data-warehouse-pipeline-on-sql-project
 Building a data warehouse with SQL Postgres's server  by using ETL processing, data modeling and analytic
 
-🎯 Welcome to the Data Warehouse Pipeline SQL Project!
+## 🎯 Welcome to the Data Warehouse Pipeline SQL Project!
 
 
 Welcome to our comprehensive data warehouse implementation project! This repository contains a complete end-to-end data pipeline solution built using SQL and modern data warehousing principles. Whether you're a data engineer, analyst, or SQL enthusiast, you'll find valuable resources here for building, managing, and optimizing data warehouses.
 
-🚀 Project Overview
+## 🚀 Project Overview
 
 This project demonstrates a fully functional data warehouse pipeline with:
 
@@ -32,7 +32,7 @@ Scalable architecture that can handle growing data volumes
 
 -- Best Practices: Industry-standard data warehousing techniques
 
-🎯 Key Features
+## 🎯 Key Features
  
 ✅ Modular Design - Easy to understand and extend components
 ✅ Real-world Scenarios - Based on actual business use cases
@@ -40,7 +40,7 @@ Scalable architecture that can handle growing data volumes
 ✅ Performance Focused - Optimized for speed and efficiency
 ✅ Scalable Architecture - Ready for enterprise-level deployment
 
-🏗️ Project Structure
+## 🏗️ Project Structure
 
 data-warehouse-pipeline-sql/
 │
