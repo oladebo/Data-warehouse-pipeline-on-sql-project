@@ -10,19 +10,19 @@ Welcome to our comprehensive data warehouse implementation project! This reposit
 
 This project demonstrates a fully functional data warehouse pipeline with:
 
-Multi-source data integration from various business systems
+- Multi-source data integration from various business systems
 
-Structured ETL/ELT processes for data transformation
+- Structured ETL/ELT processes for data transformation
 
-Star schema design for optimal query performance
+- Star schema design for optimal query performance
 
-Analytical capabilities for business intelligence
+- Analytical capabilities for business intelligence
 
-Scalable architecture that can handle growing data volumes
+- Scalable architecture that can handle growing data volumes
 
 ## 📊 What You'll Find Here
 
-** Complete Datasets: Realistic business data across multiple domains
+- Complete Datasets: Realistic business data across multiple domains
 
 - SQL Scripts: Production-ready SQL code for all pipeline stages
 
@@ -34,11 +34,11 @@ Scalable architecture that can handle growing data volumes
 
 ## 🎯 Key Features
  
-✅ Modular Design - Easy to understand and extend components
-✅ Real-world Scenarios - Based on actual business use cases
-✅ Comprehensive Documentation - Step-by-step implementation guides
-✅ Performance Focused - Optimized for speed and efficiency
-✅ Scalable Architecture - Ready for enterprise-level deployment
+- ✅ Modular Design - Easy to understand and extend components
+- ✅ Real-world Scenarios - Based on actual business use cases
+- ✅ Comprehensive Documentation - Step-by-step implementation guides
+- ✅ Performance Focused - Optimized for speed and efficiency
+- ✅ Scalable Architecture - Ready for enterprise-level deployment
 
 ## 🏗️ Project Structure
 
@@ -76,6 +76,13 @@ data-warehouse-pipeline-sql/
 
 
 ## BI Analytic & Reporting & (Data Analysis)
+
+### Objectives:
+
+To developed SQL base analytics to deliver details insight for the stakeholde
+Customer Behaviour
+Product performance
+Sales Trend
 
 ## License
 This project is [license under]:(https://opensource.org/license/mit) you are free to use, modify, and share project with proper attribution
