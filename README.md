@@ -20,7 +20,7 @@ Analytical capabilities for business intelligence
 
 Scalable architecture that can handle growing data volumes
 
-📊 What You'll Find Here
+## 📊 What You'll Find Here
 
 ** Complete Datasets: Realistic business data across multiple domains
 
