@@ -24,13 +24,13 @@ Scalable architecture that can handle growing data volumes
 
 ** Complete Datasets: Realistic business data across multiple domains
 
--- SQL Scripts: Production-ready SQL code for all pipeline stages
+- SQL Scripts: Production-ready SQL code for all pipeline stages
 
--- Architecture Documentation: Clear diagrams and design decisions
+- Architecture Documentation: Clear diagrams and design decisions
 
--- Performance Optimization: Indexing, partitioning, and query tuning
+- Performance Optimization: Indexing, partitioning, and query tuning
 
--- Best Practices: Industry-standard data warehousing techniques
+- Best Practices: Industry-standard data warehousing techniques
 
 ## 🎯 Key Features
  
