@@ -79,10 +79,10 @@ data-warehouse-pipeline-sql/
 
 ### Objectives:
 
-To developed SQL base analytics to deliver details insight for the stakeholde
-Customer Behaviour
-Product performance
-Sales Trend
+#### To developed SQL base analytics to deliver details insight for the stakeholde
+##### Customer Behaviour
+##### Product performance
+##### Sales Trend
 
 ## License
 This project is [license under]:(https://opensource.org/license/mit) you are free to use, modify, and share project with proper attribution
