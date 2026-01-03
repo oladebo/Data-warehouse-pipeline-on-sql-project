@@ -22,7 +22,7 @@ Scalable architecture that can handle growing data volumes
 
 📊 What You'll Find Here
 
--- Complete Datasets: Realistic business data across multiple domains
+** Complete Datasets: Realistic business data across multiple domains
 
 -- SQL Scripts: Production-ready SQL code for all pipeline stages
 
