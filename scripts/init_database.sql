@@ -10,7 +10,7 @@ Warning:
   deleted. proceed with caution and ensure you have proper back_up before running the script
 */
 
-  
+
   
   
 -- =============================================
@@ -29,17 +29,18 @@ CREATE DATABASE DataWarehouse
 -- COMMENT ON DATABASE master_data_warehouse IS 'DataWarehouse with Bronze-Silver-Gold Architecture';
 
 
+CREATE SCHEMA IF NOT EXISTS bronze;    -- Raw/landing zone
+CREATE SCHEMA IF NOT EXISTS silver;    -- Cleaned/transformed data
+CREATE SCHEMA IF NOT EXISTS gold;      -- Business-ready/aggregated data
 
-  
+
 -- =============================================
 --  BRONZE LAYER RAW CUST TABLE - CRM_CUST_INFO
 -- =============================================
 
-
 -- Drop table if exists bronze.crm_cust_info
 
 DROP TABLE IF EXISTS bronze.crm_cust_info;
-
 
 CREATE TABLE bronze.crm_cust_info (
     cust_id INTEGER PRIMARY KEY,
@@ -50,13 +51,14 @@ CREATE TABLE bronze.crm_cust_info (
     cust_gender CHAR(10) CHECK (cust_gender IN ('M', 'F')),
     cust_create_date DATE NOT NULL
 	);
-			
+
+
 -- =============================================
 --  BRONZE LAYER RAW PROD TABLE - CRM_PROD_INFO
 -- =============================================
 
-
 -- Drop table if exists bronze.prod_info
+
 DROP TABLE IF EXISTS bronze.crm_prod_info;
 
 -- Create products table with correct name and data types
@@ -69,12 +71,13 @@ CREATE TABLE bronze.crm_prod_info (
     prod_start_date DATE NOT NULL,
     prod_end_date DATE
 	);
-	
-	
+
+
 -- =============================================
 -- BRONZE LAYER RAW SALES TABLE - CRM_SALES_DETAILS
 -- =============================================
 
+-- Drop table if exists bronze.crm_sales_details
 
 DROP TABLE IF EXISTS bronze.crm_sales_details;
 
@@ -95,7 +98,7 @@ CREATE TABLE bronze.crm_sales_details (
 -- BRONZE LAYER RAW ERP_CUST_AZ1
 -- =============================================
 
--- Drop table if exists
+-- Drop table if exists bronze.erp_cust_az1
 DROP TABLE IF EXISTS bronze.erp_cust_az1;
 
 -- Create table with appropriate data types
@@ -110,7 +113,7 @@ CREATE TABLE bronze.erp_cust_az1 (
 --  BRONZE LAYER RAW PROD TABLE - ERP_LOC_A101
 -- =============================================
 
--- Drop table if exists
+-- Drop table if exists bronze.erp_loc_a101
 DROP TABLE IF EXISTS bronze.erp_loc_a101;
 
 -- Create table with appropriate data types
@@ -120,14 +123,14 @@ CREATE TABLE bronze.erp_loc_a101 (
 );
 
 -- =============================================
---  BRONZE LAYER RAW PROD TABLE - ERP_LOC_A101
+--  BRONZE LAYER RAW PROD TABLE - ERP_PX_CAT_G1V2
 -- =============================================
 
--- Drop table if exists
-DROP TABLE IF EXISTS bronze.erp_loc_a101;
+-- Drop table if exists bronze.erp_px_cat_g1v2
+DROP TABLE IF EXISTS bronze.erp_px_cat_g1v2;
 
 -- Create table with appropriate data types
-CREATE TABLE bronze.erp_loc_a101 (
+CREATE TABLE bronze.erp_px_cat_g1v2 (
     id VARCHAR(10) PRIMARY KEY,
     category VARCHAR(50) NOT NULL,
     sub_category VARCHAR(100) NOT NULL,
@@ -139,6 +142,3 @@ CREATE TABLE bronze.erp_loc_a101 (
 
 
 
-CREATE SCHEMA IF NOT EXISTS bronze;    -- Raw/landing zone
-CREATE SCHEMA IF NOT EXISTS silver;    -- Cleaned/transformed data
-CREATE SCHEMA IF NOT EXISTS gold;      -- Business-ready/aggregated data
