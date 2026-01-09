@@ -141,4 +141,328 @@ CREATE TABLE bronze.erp_px_cat_g1v2 (
 
 
 
+## Upload the CSV File to Postgres sql using python to insert data into the table database
+
+- Create a virtual Environment.
+- Install the require library
+- Open the Complete data warehouse pipeline project file where we have source crm and erp.
+- Then connect the postgress server engine from vitual studio vsCode in other to insert date into schema.
+
+
+-- ====================================================================================	
+-- ## Let import require library to read our dataset and connect to SQL postgress engine
+-- ====================================================================================
+	
+import pandas as pd
+import psycopg2
+from sqlalchemy import create_engine, text
+	
+-- =============================================================================================
+-- #### Let profiling by given the username and password our data by connecting postgres sql server
+-- =============================================================================================	
+
+USERNAME ="postgres"
+PASSWORD ="password"
+HOST ="localhost"
+PORT ="5432"
+DB_NAME ="DataWarehouse"
+	
+
+engine = create_engine(f"postgresql+psycopg2://{USERNAME}):{PASSWORD}@{HOST}:{PORT}/{DB_NAME}")
+	
+-- ======================================
+-- ## Let create the engine from Sqlalchemy
+-- ======================================	
+
+from sqlalchemy import create_engine
+
+engine = create_engine(
+    "postgresql+psycopg2://postgres:password@localhost:5432/DataWarehouse"
+)
+
+
+-- ======================================================================	
+-- ## let see the first postgres server maybe it has coonect successfully
+-- ======================================================================
+	
+from sqlalchemy import text
+
+with engine.connect() as conn:
+    result = conn.execute(text("SELECT version();"))
+    print(result.fetchone())
+
+-- ==============================
+#### A. bronze.crm_cust_info
+-- =============================	
+
+-- ===============================================	
+-- ## Let see & read the Pandas dataframe of dataset
+-- ===============================================
+
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_crm/cust_info.csv')
+	
+-- =======================================
+-- ## Let see the first 5Row of our dataset
+-- ======================================
+
+df.head(5)
+	
+-- ===================================================
+-- ## Let connect the dataset to postgres SQl database
+-- ==================================================	
+
+df.to_sql(
+    name="crm_cust_info",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+-- ==================================================================================================
+-- ## Let test the connection server to our postgress data output was successful from our python code 
+-- ================================================================================================== 
+
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.crm_cust_info;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.crm_cust_info LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+
+-- ==========================	
+### B. bronze.crm_prod_info
+-- ==========================
+
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_crm/prod_info.csv')
+	
+-- ========================================
+-- ## Let see the first 5Row of our dataset
+-- =======================================	
+
+df.head(5)
+
+-- ====================================================	
+-- ## Let connect the dataset to postgres SQl database
+-- ====================================================
+	
+df.to_sql(
+    name="crm_prod_info",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+
+-- =============================================================================================	
+-- ## Let test the connection server to our postgress data output was successful in postgres sql
+-- =============================================================================================
+	
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.crm_prod_info;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.crm_prod_info LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+-- ================================
+### C. bronze.crm_sales_details
+-- ================================	
+
+-- =================================================	
+-- ## Let see & read the Pandas dataframe of dataset
+-- =================================================	
+
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_crm/sales_details.csv')
+
+-- =======================================	
+-- ## Let see the first 5Row of our dataset
+-- ======================================
+
+df.head(5)
+
+-- =======================================================
+-- ##  Let connect the dataset to postgres SQl server database
+-- ========================================================
+	
+df.to_sql(
+    name="crm_sales_details",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+-- ============================================================================================
+-- ## Let test the connection server to our postgress data output was successful in postgres sql
+-- ===========================================================================================-	
+
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.crm_sales_details;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.crm_sales_details LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+-- ==========================
+### D. bronze.erp_cust_az1
+-- ===========================
+	
+-- ================================================
+-- ## Let see & read the Pandas dataframe of dataset
+-- =================================================	
+
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/cust_az1.csv')
+
+-- =========================================
+-- ## Let see the first 5Row of our dataset
+-- ==========================================
+	
+df.head(5)
+
+-- ==================================================
+-- ## Let connect the dataset to postgres SQl database
+-- ==================================================
+	
+df.to_sql(
+    name="erp_cust_az1",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+-- =================================================================================================================================
+-- ## Let test the connection server to our postgress inside the vscode output ipynb file data output was successful in postgres sql
+-- =================================================================================================================================
+	
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.erp_cust_az1;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.erp_cust_az1 LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+
+--============================
+### E. bronze.erp_loc_a101
+-- ============================
+	
+-- =================================================
+-- ## Let see & read the Pandas dataframe of dataset
+-- =================================================
+	
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/loc_a101.csv')
+
+-- ========================================	
+-- # Let see the first 5Row of our dataset
+-- ========================================
+	
+df.head(5)
+
+-- ===================================================	
+-- ## Let connect the dataset to postgres SQl database
+-- ===================================================
+	
+df.to_sql(
+    name="erp_loc_a101",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+-- =================================================================================================================
+-- ## Let test the connection server to our postgress data output was successful in postgres sql fron our python output
+-- =================================================================================================================
+
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.erp_loc_a101;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.erp_loc_a101 LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+-- =============================
+### F. bronze.erp_px_cat_g1v2
+-- =================================
+
+-- ================================================	
+-- ## Let see & read the Pandas dataframe of dataset
+-- ================================================
+
+df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/px_cat_g1v2.csv')
+	
+-- =======================================
+-- ## Let see the first 5Row of our dataset
+-- =======================================
+	
+df.head(5)
+
+-- ===================================================	
+-- ## Let connect the dataset to postgres SQl database
+-- ===================================================
+
+df.to_sql(
+    name="erp_cat_giv2",
+    con=engine,
+    schema="bronze",
+    if_exists="replace",
+    index=False
+)
+
+-- ============================================================================================
+## Let test the connection server to our postgress data output was successful in postgres sql
+-- ============================================================================================
+
+with engine.connect() as conn:
+    count = conn.execute(
+        text("SELECT COUNT(*) FROM bronze.erp_loc_a101;")
+    ).scalar()
+
+    print("Rows in postgres:", count)
+
+    sample = conn.execute(
+        text("SELECT * FROM bronze.erp_loc_a101 LIMIT 5;")
+    ).fetchall()
+
+    print("Sample data:", sample)
+
+
+
+
+
+
 
