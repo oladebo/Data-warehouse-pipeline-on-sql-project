@@ -140,17 +140,18 @@ CREATE TABLE bronze.erp_px_cat_g1v2 (
 
 
 
+-- ====================================================================================================
+## Upload the CSV File to Postgres sql from using python VScode to insert data into the table database
+-- ====================================================================================================
 
-** Upload the CSV File to Postgres sql using python to insert data into the table database **
-
-- Create a virtual Environment.
-- Install the require library
-- Open the Complete data warehouse pipeline project file where we have source crm and erp.
-- Then connect the postgress server engine from vitual studio vsCode in other to insert date into schema.
+-- Create a virtual Environment.
+-- Install the require library
+-- Open the Complete data warehouse pipeline project file where we have source crm and erp.
+-- Then connect the postgress server engine from vitual studio vsCode in other to insert date into schema.
 
 
 -- ====================================================================================	
--- ## Let import require library to read our dataset and connect to SQL postgress engine
+ -- ## Let import require library to read our dataset and connect to SQL postgress engine
 -- ====================================================================================
 	
 import pandas as pd
@@ -398,9 +399,9 @@ df.to_sql(
     index=False
 )
 
--- =================================================================================================================
+-- ===================================================================================================================
 -- ## Let test the connection server to our postgress data output was successful in postgres sql fron our python output
--- =================================================================================================================
+-- ===================================================================================================================
 
 with engine.connect() as conn:
     count = conn.execute(
@@ -415,25 +416,25 @@ with engine.connect() as conn:
 
     print("Sample data:", sample)
 
--- =============================
+-- ===========================
 ### F. bronze.erp_px_cat_g1v2
--- =================================
+-- ===========================
 
--- ================================================	
+-- ==================================================
 -- ## Let see & read the Pandas dataframe of dataset
--- ================================================
+-- ==================================================
 
 df = pd.read_csv('/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/px_cat_g1v2.csv')
 	
--- =======================================
+-- ========================================
 -- ## Let see the first 5Row of our dataset
--- =======================================
+-- ========================================
 	
 df.head(5)
 
--- ===================================================	
+-- ====================================================	
 -- ## Let connect the dataset to postgres SQl database
--- ===================================================
+-- ====================================================
 
 df.to_sql(
     name="erp_cat_giv2",
@@ -443,9 +444,9 @@ df.to_sql(
     index=False
 )
 
--- ============================================================================================
-## Let test the connection server to our postgress data output was successful in postgres sql
--- ============================================================================================
+-- ==============================================================================================
+-- ## Let test the connection server to our postgress data output was successful in postgres sql
+-- ==============================================================================================
 
 with engine.connect() as conn:
     count = conn.execute(
