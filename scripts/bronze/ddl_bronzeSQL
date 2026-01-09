@@ -1,0 +1,222 @@
+
+/* 
+=====================================================================================================
+--                         DDL Scripts: By Creating Bronze Table
+=====================================================================================================
+
+Script Purpose: However this script create tables in the "bronze" schema dropping the existing table 
+if they already created and exist
+run this script to re-define the DDl structure of "bronze layers"tables
+=====================================================================================================
+'/
+
+
+
+
+
+
+
+
+
+
+CREATE OR REPLACE PROCEDURE bronze.sp_create_all_bronze_tables()
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_layer_start_time TIMESTAMP;
+    v_layer_end_time   TIMESTAMP;
+
+    v_start_time TIMESTAMP;
+    v_end_time   TIMESTAMP;
+BEGIN
+    -- =============================================
+    -- BRONZE LAYER START
+    -- =============================================
+    v_layer_start_time := clock_timestamp();
+    RAISE NOTICE 'BRONZE LAYER started at %', v_layer_start_time;
+	
+	-- ========================================================
+    -- LOADING BRONZE LAYER CRM_CUST_INFO (CREATE + LOAD CSV)
+    -- ========================================================
+    v_start_time := clock_timestamp();
+    RAISE NOTICE 'CRM_CUST_INFO started at %', v_start_time;
+	
+	DROP TABLE IF EXISTS bronze.crm_cust_info;
+
+    CREATE TABLE bronze.crm_cust_info (
+        cust_id INTEGER PRIMARY KEY,
+        cust_key VARCHAR(20) UNIQUE NOT NULL,
+        cust_firstname VARCHAR(50) NOT NULL,
+        cust_lastname VARCHAR(50) NOT NULL,
+        cust_marital_status CHAR(1)
+            CHECK (cust_marital_status IN ('M', 'S', 'D', 'W')),
+        cust_gender CHAR(1)
+            CHECK (cust_gender IN ('M', 'F')),
+        cust_create_date DATE NOT NULL
+    );
+
+    COPY bronze.crm_cust_info
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project/source_crm/cust_info.csv'
+    DELIMITER ','
+    CSV HEADER;
+	
+	v_end_time := clock_timestamp();
+    RAISE NOTICE 'CRM_CUST_INFO finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+		
+    -- ============================================================
+    -- LOADING BRONZE LAYER CRM_PROD_INFO (CREATE + LOAD CSV) TABLE
+    -- ============================================================
+    v_start_time := clock_timestamp();
+    RAISE NOTICE 'CRM_PROD_INFO started at %', v_start_time;
+	
+	DROP TABLE IF EXISTS bronze.crm_prod_info;
+
+    CREATE TABLE bronze.crm_prod_info (
+        prod_id INTEGER PRIMARY KEY,
+        prod_key VARCHAR(50) UNIQUE NOT NULL,
+        prod_name VARCHAR(200) NOT NULL,
+        prod_cost DECIMAL(10,2),
+        prod_line CHAR(1)
+            CHECK (prod_line IN ('R', 'S')),
+        prod_start_date DATE NOT NULL,
+        prod_end_date DATE
+    );
+	
+	COPY bronze.crm_prod_info
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project /source_crm/prod_info.csv'
+    DELIMITER ','
+    CSV HEADER;
+	
+	v_end_time := clock_timestamp();
+    RAISE NOTICE 'CRM_PROD_INFO finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+
+    -- ====================================================================
+    -- LOADING BRONZE LAYER CRM_SALES_DETAILS (RAW)(CREATE + LOAD CSV)TABLE
+    -- ====================================================================
+	v_start_time := clock_timestamp();
+    RAISE NOTICE 'CRM_SALES_DETAILS started at %', v_start_time;
+	
+    DROP TABLE IF EXISTS bronze.crm_sales_details;
+
+    CREATE TABLE bronze.crm_sales_details (
+        sales_ord_num VARCHAR(20),
+        sales_prod_key VARCHAR(50),
+        sales_cust_id VARCHAR(20), 
+        sales_order_date VARCHAR(20),
+        sales_ship_date VARCHAR(20),
+        sales_due_date VARCHAR(20),
+        sales_amount VARCHAR(20),
+        sales_quantity VARCHAR(20),
+        sales_price VARCHAR(20)
+    );
+
+    COPY bronze.crm_sales_details
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project /source_crm/sales_details.csv'
+    DELIMITER ','
+    CSV HEADER;
+	
+	v_end_time := clock_timestamp();
+    RAISE NOTICE 'CRM_SALES_DETAILS finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+	
+    -- ==========================================================
+    -- LOADING BRONZE LAYER ERP_CUST_AZ1 (CREATE + LOAD CSV)TABLE
+    -- ==========================================================
+	v_start_time := clock_timestamp();
+    RAISE NOTICE 'ERP_CUST_AZ1 started at %', v_start_time;
+	
+    DROP TABLE IF EXISTS bronze.erp_cust_az1;
+
+    CREATE TABLE bronze.erp_cust_az1 (
+        cid VARCHAR(20) PRIMARY KEY,
+        birth_date DATE NOT NULL,
+        gender VARCHAR(10)
+            CHECK (gender IN ('Male', 'Female', 'Other'))
+    );
+
+    COPY bronze.erp_cust_az1
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/cust_az1.csv'
+    DELIMITER ','
+    CSV HEADER;
+		
+	v_end_time := clock_timestamp();
+    RAISE NOTICE 'ERP_CUST_AZ1 finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+	
+    -- ===========================================================
+    -- LOADING BRONZE LAYER ERP_LOC_A101 (CREATE + LOAD CSV)TABLE
+    -- ===========================================================
+	v_start_time := clock_timestamp();
+    RAISE NOTICE 'ERP_LOC_A101 started at %', v_start_time;
+	
+    DROP TABLE IF EXISTS bronze.erp_loc_a101;
+
+    CREATE TABLE bronze.erp_loc_a101 (
+        cid VARCHAR(20) PRIMARY KEY,
+        country VARCHAR(100) NOT NULL
+    );
+	
+	COPY bronze.erp_loc_a101
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/loc_a101.csv'
+    DELIMITER ','
+    CSV HEADER;
+	
+	v_end_time := clock_timestamp();
+    RAISE NOTICE 'ERP_LOC_A101 finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+
+    -- =============================================================
+    -- LOADING BRONZE LAYER ERP_PX_CAT_G1V2 (CREATE + LOAD CSV)TABLE
+    -- =============================================================
+	v_start_time := clock_timestamp();
+    RAISE NOTICE 'ERP_PX_CAT_G1V2 started at %', v_start_time;
+	
+    DROP TABLE IF EXISTS bronze.erp_px_cat_g1v2;
+
+    CREATE TABLE bronze.erp_px_cat_g1v2 (
+        id VARCHAR(10) PRIMARY KEY,
+        category VARCHAR(50) NOT NULL,
+        sub_category VARCHAR(100) NOT NULL,
+        maintenance VARCHAR(3)
+    );
+
+    COPY bronze.erp_px_cat_g1v2
+    FROM '/Users/user/Desktop/data_wareHouse_pipeline_project /source_erp/px_cat_g1v2.csv'
+    DELIMITER ','
+    CSV HEADER;
+		
+    v_end_time := clock_timestamp();
+    RAISE NOTICE 'ERP_PX_CAT_G1V2 finished at %, duration: % seconds',v_end_time,
+    EXTRACT(EPOCH FROM (v_end_time - v_start_time));
+		
+	-- =============================================
+    -- BRONZE LAYER END
+    -- =============================================
+    v_layer_end_time := clock_timestamp();
+    RAISE NOTICE 'BRONZE LAYER finished at %', v_layer_end_time;
+
+    RAISE NOTICE 'TOTAL BRONZE LAYER duration: % seconds',
+    EXTRACT(EPOCH FROM (v_layer_end_time - v_layer_start_time));
+		
+	-- =============================================
+    -- BRONZE LAYER END ERROR MESSAGE
+    -- =============================================	
+			
+	EXCEPTION
+    WHEN undefined_file THEN
+        RAISE EXCEPTION
+        'BRONZE LAYER FAILED: Source file not found or path is invalid';
+    WHEN insufficient_privilege THEN
+        RAISE EXCEPTION
+        'BRONZE LAYER FAILED: PostgreSQL does not have permission to read source file';
+    WHEN unique_violation THEN
+        RAISE EXCEPTION
+        'BRONZE LAYER FAILED: Duplicate keys detected during load';
+    WHEN check_violation THEN
+        RAISE EXCEPTION
+        'BRONZE LAYER FAILED: Data violates CHECK constraints (invalid domain values)';
+
+END;
+$$;
