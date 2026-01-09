@@ -141,7 +141,7 @@ CREATE TABLE bronze.erp_px_cat_g1v2 (
 
 
 
-## Upload the CSV File to Postgres sql using python to insert data into the table database
+** Upload the CSV File to Postgres sql using python to insert data into the table database **
 
 - Create a virtual Environment.
 - Install the require library
