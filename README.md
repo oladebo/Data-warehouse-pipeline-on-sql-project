@@ -42,37 +42,7 @@ This project demonstrates a fully functional data warehouse pipeline with:
 
 ## 🏗️ Project Structure
 
-data-warehouse-pipeline-sql/
-│
-├── datasets/              # Source data files
-│   ├── customer_info.csv
-│   ├── prod_info.csv
-│   ├── sales_details.csv
-│   ├── cust_az12.csv
-│   ├── loc_a101.csv
-│   └── px_cat_g1v2.csv
-│
-├── sql_scripts/           # SQL implementation
-│   ├── 01_schema_design/
-│   ├── 02_etl_pipeline/
-│   ├── 03_views_functions/
-│   ├── 04_performance_tuning/
-│   └── 05_analytical_queries/
-│
-├── documentation/         # Project documentation
-│   ├── architecture.md
-│   ├── data_dictionary.md
-│   └── implementation_guide.md
-│
-├── diagrams/              # Architecture diagrams
-│   ├── er_diagrams/
-│   ├── pipeline_flow/
-│   └── star_schema/
-│
-└── tests/                # SQL test scripts
-    ├── data_quality/
-    ├── performance_tests/
-    └── integration_tests/
+
 
 
 ## BI Analytic & Reporting & (Data Analysis)
