@@ -12,13 +12,6 @@ run this script to re-define the DDl structure of "bronze layers"tables
 
 
 
-
-
-
-
-
-
-
 CREATE OR REPLACE PROCEDURE bronze.sp_create_all_bronze_tables()
 LANGUAGE plpgsql
 AS $$
