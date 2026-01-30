@@ -58,5 +58,7 @@ This project demonstrates a fully functional data warehouse pipeline with:
 This project is [license under]:(https://opensource.org/license/mit) you are free to use, modify, and share project with proper attribution
 
 ### About me
+Am a results-driven Data Scientist Analyst with proven expertise in Excel, SQL, Python, and data visualization (Tableau, Power BI). Skilled in building dashboards, performing exploratory data analysis, and leveraging cloud data platforms (AWS, GCP) to drive insights. Adept at translating data into actionable business strategies, defining KPIs, and ensuring data integrity. Strong communicator and collaborator with a track record of supporting cross-functional teams, optimizing reporting workflows, and improving business performance.<img width="468" height="111" alt="image" src="https://github.com/user-attachments/assets/0969c97f-0121-4381-a504-a263fe3ebaab" />
+
 
 
