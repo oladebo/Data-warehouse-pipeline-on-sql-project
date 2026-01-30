@@ -42,7 +42,7 @@ This project demonstrates a fully functional data warehouse pipeline with:
 
 ## 🏗️ Project Structure
 
-
+![image](https://github.com/oladebo/Data-warehouse-pipeline-on-sql-project/blob/38f3f65dd0c428294c2769219db674f746985b62/docs/Screen%20Shot%202026-01-30%20at%2010.31.34.png)
 
 
 ## BI Analytic & Reporting & (Data Analysis)
