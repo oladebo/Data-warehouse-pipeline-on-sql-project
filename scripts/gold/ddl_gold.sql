@@ -64,27 +64,35 @@ ON pn.cat_id = pc.id
 WHERE pn.prod_end_date IS NULL -- Filter all the historical data
 
 
+
 -=========================================================================================
                     -- Creating gold.fact_sales 
--- ==========================================================================================
-DROP VIEW IF EXISTS gold.dim_product;
+-- =======================================================================================
 
+
+-- Drop the view if it already exists
+DROP VIEW IF EXISTS gold.fact_sales;
+
+-- Create the view
 CREATE VIEW gold.fact_sales AS
 SELECT 
-	sd.sales_ord_num AS order_number,
-	pr.prod_key,
-	cu.customer_key,
---	sd.sales_prod_key, Remove sd.sales_prod_key, generated sorogate keys from our product table
---	sd.sales_cust_id, Removes sd. sales cust_id bcos we don't need them join them with customer_key
-	sd.sales_order_date AS order_date,
-	sd.sales_ship_date AS shipping_date,
-	sd.sales_due_date AS due_date,
-	sd.sales_amount,
-	sd.sales_quantity,
-	sd.sales_price AS price
+    ROW_NUMBER() OVER (
+        ORDER BY sd.sales_ord_num
+    ) AS prod_key,                     --  generate sorogate keys fron product table serial number AS prod_key
+
+    sd.sales_ord_num      AS order_number,
+    cu.customer_key,
+    sd.sales_order_date   AS order_date,
+    sd.sales_ship_date    AS shipping_date,
+    sd.sales_due_date     AS due_date,
+    sd.sales_amount,
+    sd.sales_quantity,
+    sd.sales_price        AS price
 FROM silver.crm_sales_details sd
 LEFT JOIN gold.dim_product pr
-ON sd.sales_prod_key = pr.product_number
+    ON sd.sales_prod_key = pr.product_number
 LEFT JOIN gold.dim_customer cu
-ON sd.sales_cust_id = cu.customer_id;
+    ON sd.sales_cust_id = cu.customer_id;
+
+
 
